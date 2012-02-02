@@ -28,13 +28,10 @@ static NSString *PARSE_MASTER_KEY       =     @"UDyagsksRQgwPf9ZF5Yj43vhvvo7ccAV
     return self;
 }
 
-- (void)startLoop:(NSTimer *)timer {
-    NSLog(@"In here!!");
-}
-
 - (void)retrieveUnrecognizedParseIdFromUrl:(NSTimer *)timer {
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self DB_REQUEST_URL]];
+    NSLog(@"Sending Request to Parse...");
     [request startSynchronous];
     NSError *error = [request error];
     if (!error) {
@@ -48,11 +45,11 @@ static NSString *PARSE_MASTER_KEY       =     @"UDyagsksRQgwPf9ZF5Yj43vhvvo7ccAV
         //Loop over parse_id's in the dictionary and query Parse API for image
         for (NSDictionary *parseIdObj in responseObj)
         {
-            
             //Get Data from Parse for each Parse ID
             NSString *parseId = [parseIdObj objectForKey:@"parse_id"];
-            NSString *resultString = [self recognizePersonFromParseId:parseId];            
-            NSLog (@"%@", resultString);
+            NSLog(@"Parse ID Acquired with ID of %@...", parseId);
+            NSString *resultString = [self recognizePersonFromParseId:parseId];
+            [self saveImageAsRecognizedWithParseId:parseId andFacebookId:@"sampleFbId" andRecognizedAs:@"sampleRecognizedAs"];
         }
         
     }
@@ -113,4 +110,24 @@ static NSString *PARSE_MASTER_KEY       =     @"UDyagsksRQgwPf9ZF5Yj43vhvvo7ccAV
     return @"";
 }
 
+
+- (void)saveImageAsRecognizedWithParseId:(NSString *)parseId andFacebookId:(NSString *)fbId andRecognizedAs:(NSString *)name {
+    
+    
+    NSString *apiUrlString = [NSString stringWithFormat:@"http://stormy-moon-8803.herokuapp.com/api/updateUnrecognizedImage/%@/%@/%@", parseId, fbId, name];
+    
+    NSLog(@"Updating unrecognized image as a recognized image. API URL called is %@ ", apiUrlString);
+
+    
+    NSURL *apiUrl = [NSURL URLWithString:apiUrlString];
+    ASIHTTPRequest *apiRequest = [ASIHTTPRequest requestWithURL:apiUrl];
+    [apiRequest startSynchronous];
+    
+    NSError *error = [apiRequest error];
+    if (!error) {
+        NSString *response = [apiRequest responseString];
+        NSLog(@"Success in updating. Request response was - - - %@", response);       
+    }
+    
+}
 @end

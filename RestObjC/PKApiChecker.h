@@ -18,7 +18,8 @@
 @property (nonatomic, retain) NSURL *DB_REQUEST_URL;
 
 - (id)init;
-- (void)startLoop:(NSTimer *)timer;
 - (void)retrieveUnrecognizedParseIdFromUrl:(NSTimer *)timer;
 - (NSString *)recognizePersonFromParseId:(NSString *)parseId;
+- (void)saveImageAsRecognizedWithParseId:(NSString *)parseId andFacebookId:(NSString *)fbId andRecognizedAs:(NSString *)name;
+
 @end

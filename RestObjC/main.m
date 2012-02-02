@@ -18,7 +18,23 @@ int main (int argc, const char * argv[])
             
         // insert code here...
         NSLog(@"Starting Engines...");
-                
+        //NSURL *url = [NSURL URLWithString:@"http://stormy-moon-8803.herokuapp.com/api/getUnrecognizedImages"];
+
+        PKApiChecker *checker = [[PKApiChecker alloc] init];
+        
+        NSDate *d = [NSDate dateWithTimeIntervalSinceNow: 2.0];
+        
+        
+        NSTimer *t = [[NSTimer alloc] initWithFireDate: d
+                                              interval: 2.0
+                                                target: checker
+                                              selector:@selector(retrieveUnrecognizedParseIdFromUrl:)
+                                              userInfo:nil repeats:YES];
+        NSRunLoop *runner = [NSRunLoop currentRunLoop];
+        [runner addTimer:t forMode: NSDefaultRunLoopMode];
+        [runner run];
+        
+        /*
         NSURL *url = [NSURL URLWithString:@"http://stormy-moon-8803.herokuapp.com/api/getUnrecognizedImages"];
         ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
         [request startSynchronous];
@@ -45,6 +61,7 @@ int main (int argc, const char * argv[])
             
             
         }
+        */
     
         
     }

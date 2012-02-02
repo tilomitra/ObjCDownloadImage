@@ -13,19 +13,49 @@
 static NSString *PARSE_APPLICATION_ID   =     @"DOCKNIyEg5jGqZFj18sBxJOTXvYCQjryFDCrD35G";
 static NSString *PARSE_MASTER_KEY       =     @"UDyagsksRQgwPf9ZF5Yj43vhvvo7ccAVzSenrIRB";
 
-
-
-
 @implementation PKApiChecker
 @synthesize PARSE_REST_URL;
+@synthesize DB_REQUEST_URL;
 
 - (id)init {
     
     self = [super init];
     if (self) {
         [self setPARSE_REST_URL:[NSString stringWithFormat:@"https://%@:%@%@", PARSE_APPLICATION_ID, PARSE_MASTER_KEY, @"@api.parse.com/1/classes/CapturedPhoto/"]];
+        [self setDB_REQUEST_URL:[NSURL URLWithString:@"http://stormy-moon-8803.herokuapp.com/api/getUnrecognizedImages"]];
+
     }
     return self;
+}
+
+- (void)startLoop:(NSTimer *)timer {
+    NSLog(@"In here!!");
+}
+
+- (void)retrieveUnrecognizedParseIdFromUrl:(NSTimer *)timer {
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self DB_REQUEST_URL]];
+    [request startSynchronous];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *response = [request responseString];
+        
+        //get the JSON and store it in a NSDictionary
+        SBJsonParser *parser = [[SBJsonParser alloc] init];
+        NSDictionary *responseObj = [parser objectWithString:response error:nil];
+        
+        
+        //Loop over parse_id's in the dictionary and query Parse API for image
+        for (NSDictionary *parseIdObj in responseObj)
+        {
+            
+            //Get Data from Parse for each Parse ID
+            NSString *parseId = [parseIdObj objectForKey:@"parse_id"];
+            NSString *resultString = [self recognizePersonFromParseId:parseId];            
+            NSLog (@"%@", resultString);
+        }
+        
+    }
 }
 
 - (NSString *)recognizePersonFromParseId:(NSString *)parseId {

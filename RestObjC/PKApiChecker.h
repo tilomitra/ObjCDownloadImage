@@ -11,10 +11,14 @@
 #import "SBJson.h"
 @interface PKApiChecker : NSObject {
     NSString *PARSE_REST_URL;
+    NSURL *DB_REQUEST_URL;
 }
 
 @property (nonatomic, retain) NSString *PARSE_REST_URL;
+@property (nonatomic, retain) NSURL *DB_REQUEST_URL;
 
 - (id)init;
+- (void)startLoop:(NSTimer *)timer;
+- (void)retrieveUnrecognizedParseIdFromUrl:(NSTimer *)timer;
 - (NSString *)recognizePersonFromParseId:(NSString *)parseId;
 @end

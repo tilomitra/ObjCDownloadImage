@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390D346114DA16270086BD2A /* PKApiChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 390D346014DA16270086BD2A /* PKApiChecker.m */; };
 		397F348214D4EBC900F562CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397F348114D4EBC900F562CA /* Foundation.framework */; };
 		397F348514D4EBC900F562CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 397F348414D4EBC900F562CA /* main.m */; };
 		397F348914D4EBC900F562CA /* RestObjC.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 397F348814D4EBC900F562CA /* RestObjC.1 */; };
@@ -48,6 +49,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		390D345F14DA16270086BD2A /* PKApiChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKApiChecker.h; sourceTree = "<group>"; };
+		390D346014DA16270086BD2A /* PKApiChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKApiChecker.m; sourceTree = "<group>"; };
 		397F347D14D4EBC900F562CA /* RestObjC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RestObjC; sourceTree = BUILT_PRODUCTS_DIR; };
 		397F348114D4EBC900F562CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		397F348414D4EBC900F562CA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				397F34BC14D502BD00F562CA /* ASIHTTPRequest */,
 				397F349214D501A400F562CA /* SBJson */,
 				397F348414D4EBC900F562CA /* main.m */,
+				390D345F14DA16270086BD2A /* PKApiChecker.h */,
+				390D346014DA16270086BD2A /* PKApiChecker.m */,
 				397F348814D4EBC900F562CA /* RestObjC.1 */,
 				397F348614D4EBC900F562CA /* Supporting Files */,
 			);
@@ -292,6 +297,7 @@
 				397F34D614D5035A00F562CA /* ASIHTTPRequest.m in Sources */,
 				397F34D714D5035A00F562CA /* ASIInputStream.m in Sources */,
 				397F34D814D5035A00F562CA /* ASINetworkQueue.m in Sources */,
+				390D346114DA16270086BD2A /* PKApiChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +388,7 @@
 				397F348E14D4EBC900F562CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
